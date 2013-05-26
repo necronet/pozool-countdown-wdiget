@@ -1,0 +1,96 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/panel_margin"
+    android:baselineAligned="true"
+    tools:context=".ConfigurationActivity" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:divider="?android:dividerHorizontal"
+        android:dividerPadding="@dimen/divider_padding"
+        android:orientation="vertical"
+        android:showDividers="middle" >
+
+        <EditText
+            android:id="@+id/edit_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/component_margin"
+            android:ems="10"
+            android:hint="@string/event_name"
+            android:imeOptions="actionDone"
+            android:inputType="textNoSuggestions" >
+
+            <requestFocus />
+        </EditText>
+
+        <com.squareup.timessquare.CalendarPickerView
+            android:id="@+id/calendar_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/component_margin" >
+        </com.squareup.timessquare.CalendarPickerView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/black"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/text_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:paddingRight="@dimen/right_padding"
+            android:text="Event goes here"
+            android:visibility="gone"
+            android:textColor="@color/text_light"
+            android:textSize="@dimen/big_text_size"
+            tools:ignore="HardcodedText" />
+
+       <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/black"
+        android:gravity="center"
+        android:orientation="horizontal" >
+        
+        <TextView
+            android:id="@+id/text_day_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:paddingRight="@dimen/right_padding"
+            android:text="24"
+            android:textColor="@color/text_light"
+            android:textSize="@dimen/big_text_size"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="days left"
+            android:textColor="@color/text_light"
+            android:textSize="@dimen/big_text_size"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
