@@ -4,5 +4,5 @@
     <string name="app_name">TickTack</string>
     <string name="days_left">%s days left</string>
     <string name="event_name">What\'s on that date?</string>
-
+    <string name="done">Done</string>
 </resources>
