@@ -8,13 +8,19 @@ import org.joda.time.Period;
 import org.joda.time.PeriodType;
 
 import android.app.Activity;
+import android.appwidget.AppWidgetManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
@@ -26,12 +32,28 @@ public class ConfigurationActivity extends Activity implements OnDateSelectedLis
 	private DateMidnight startDate, endDate;
 	private CalendarPickerView calendarPickerView;
 	private TextView textDayLeft;
+	private int appWidgetId;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_configuration);
 		
+		Intent intent = getIntent();
+		Bundle extras = intent.getExtras();
+		if (extras != null) {
+		    appWidgetId = extras.getInt(
+		    		AppWidgetManager.EXTRA_APPWIDGET_ID, 
+		    		AppWidgetManager.INVALID_APPWIDGET_ID);
+		}
+
+		Log.d("Configuration", "AppWidgetId: "+ appWidgetId);
+
+		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+
+		RemoteViews views = new RemoteViews(getPackageName(),R.layout.ticktack);
+		appWidgetManager.updateAppWidget(appWidgetId, views);
+
 		startDate = DateMidnight.now();
 		endDate = DateMidnight.now().plusDays(1);
 		
@@ -90,6 +112,26 @@ public class ConfigurationActivity extends Activity implements OnDateSelectedLis
 		
 		textDayLeft = (TextView)findViewById(R.id.text_day_left);
 		textDayLeft.setText(String.valueOf(period.getDays()));
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu){
+		super.onCreateOptionsMenu(menu);
+		getMenuInflater().inflate(R.menu.configuration, menu);
+		return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		switch(item.getItemId()) {
+			case R.id.action_done:
+				Intent resultValue = new Intent();
+				resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+				setResult(RESULT_OK, resultValue);
+				finish();
+				return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 	
 
