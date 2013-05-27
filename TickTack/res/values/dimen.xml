@@ -3,6 +3,8 @@
 	<dimen name="panel_margin">16dp</dimen>
 	<dimen name="divider_padding">2dp</dimen>
 	<dimen name="component_margin">5dp</dimen>
-	<dimen name="big_text_size">16sp</dimen>
+	<dimen name="standard_text_size">16sp</dimen>
+	<dimen name="big_text_size">32sp</dimen>
+	<dimen name="huge_text_size">48sp</dimen>
 	<dimen name="right_padding">5dp</dimen>
 </resources>
