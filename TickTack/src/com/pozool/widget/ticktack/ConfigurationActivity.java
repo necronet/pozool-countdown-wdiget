@@ -1,5 +1,7 @@
 package com.pozool.widget.ticktack;
 
+import org.joda.time.DateMidnight;
+
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,6 +47,11 @@ public class ConfigurationActivity extends FragmentActivity{
 		switch(item.getItemId()) {
 			case R.id.action_done:
 				AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+
+				ConfigurationFragment fragment = (ConfigurationFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentConfiguration);
+				DateMidnight endDate = fragment.getEndDate();
+
+				LocalPersistence.witeObjectToFile(this, endDate, String.valueOf(appWidgetId));
 
 				RemoteViews views = new RemoteViews(getPackageName(),R.layout.ticktack);
 				views.setTextViewText(R.id.textDays, days);

@@ -61,20 +61,15 @@ public class ConfigurationFragment extends Fragment
 			@Override
 			public void onTextChanged(CharSequence text, int start, int before,
 					int count) {
-				
 				((ConfigurationActivity) getActivity()).updatePreviewEvent(text.toString());
 			}
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-
-			}
+					int after) {}
 
 			@Override
-			public void afterTextChanged(Editable s) {
-
-			}
+			public void afterTextChanged(Editable s) {}
 		});
 
 		return view;
@@ -87,8 +82,8 @@ public class ConfigurationFragment extends Fragment
 
 	public void updateCountdownUI() {
 		Period period = new Period(startDate, endDate, PeriodType.dayTime());
-		((ConfigurationActivity) getActivity()).updatePreviewDate(String
-				.valueOf(period.getDays()));
+		String days = String.valueOf(period.getDays());
+		((ConfigurationActivity) getActivity()).updatePreviewDate(days);
 	}
 
 	@Override
@@ -102,7 +97,10 @@ public class ConfigurationFragment extends Fragment
 			int dayOfMonth) {
 		endDate = new DateMidnight(year, monthOfYear+1, dayOfMonth);
 		updateCountdownUI();
-		
+	}
+	
+	public DateMidnight getEndDate() { 
+		return endDate;
 	}
 
 }
