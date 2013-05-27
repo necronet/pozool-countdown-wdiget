@@ -12,6 +12,10 @@
 bin/
 gen/
 
+#Ignore dist files and keys
+dist/
+*.key
+
 # Local configuration file (sdk path, etc)
 local.properties
 
