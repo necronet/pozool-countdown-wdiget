@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:divider="?android:dividerHorizontal"
+    android:dividerPadding="@dimen/divider_padding"
+    android:orientation="vertical"
+    android:showDividers="middle" >
+
+    <EditText
+        android:id="@+id/edit_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/component_margin"
+        android:ems="10"
+        android:hint="@string/event_name"
+        android:imeOptions="actionDone"
+        android:inputType="textNoSuggestions" >
+
+        <requestFocus />
+    </EditText>
+
+    <com.squareup.timessquare.CalendarPickerView
+        android:id="@+id/calendar_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/component_margin" >
+    </com.squareup.timessquare.CalendarPickerView>
+
+</LinearLayout>
