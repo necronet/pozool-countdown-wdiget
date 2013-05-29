@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
             android:gravity="center"
-            android:text="days left"
+            android:text="@string/days_left_text"
             android:textColor="@color/text_light"
             android:textSize="@dimen/big_text_size"
             android:textStyle="bold"
