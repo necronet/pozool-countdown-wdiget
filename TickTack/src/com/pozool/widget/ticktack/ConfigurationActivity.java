@@ -46,16 +46,11 @@ public class ConfigurationActivity extends FragmentActivity{
 		
 		switch(item.getItemId()) {
 			case R.id.action_done:
-				AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-
 				ConfigurationFragment fragment = (ConfigurationFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentConfiguration);
 				DateMidnight endDate = fragment.getEndDate();
-
 				LocalPersistence.witeObjectToFile(this, endDate, String.valueOf(appWidgetId));
 
-				RemoteViews views = new RemoteViews(getPackageName(),R.layout.ticktack);
-				views.setTextViewText(R.id.textDays, days);
-				appWidgetManager.updateAppWidget(appWidgetId, views);
+				TickTackWidgetProvider.updateWidget(this, appWidgetId, endDate);
 
 				Intent resultValue = new Intent();
 				resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
