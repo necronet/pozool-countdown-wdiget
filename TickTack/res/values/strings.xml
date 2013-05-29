@@ -3,8 +3,9 @@
 
     <string name="app_name">TickTack</string>
     <string name="welcome_thanks">Welcome to TickTack, thanks for download</string>
-    <string name="days_left">%s days left</string>
-    <string name="days_left_text">DAYS LEFT</string>
+    <string name="today_text">today!</string>
+    <string name="days_left_text">days left</string>
+    <string name="days_since_text">days since</string>
     <string name="event_name">What\'s on that date?</string>
     <string name="done">Done</string>
     <string name="start_using">To start using tick tack, go to your widget tab in your app list, you will see an widget thumbnail similar to :</string>
