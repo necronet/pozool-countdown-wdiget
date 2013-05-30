@@ -9,12 +9,10 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.RemoteViews;
 
 public class ConfigurationActivity extends FragmentActivity{
 
 	private int appWidgetId;
-	private String days;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +61,6 @@ public class ConfigurationActivity extends FragmentActivity{
 
 	public void updatePreviewDate(String days) {
 		PreviewFragment preview = (PreviewFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentPreview);
-		this.days = days;
 		if (preview != null) {
 			preview.updateDate(days);
 		}
