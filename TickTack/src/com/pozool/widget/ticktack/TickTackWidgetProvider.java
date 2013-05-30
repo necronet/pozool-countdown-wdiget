@@ -39,8 +39,9 @@ public class TickTackWidgetProvider extends AppWidgetProvider {
 
 		// Create an Intent to launch ExampleActivity
 		Intent intent = new Intent(context, ConfigurationActivity.class);
-		PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
-				intent, 0);
+		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+		intent.putExtra("endDate", endDate.toString());
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
 		DateMidnight startDate = DateMidnight.now();
 		Period period = new Period(startDate, endDate, PeriodType.dayTime());
@@ -55,6 +56,8 @@ public class TickTackWidgetProvider extends AppWidgetProvider {
 				.getInstance(context);
 		RemoteViews views = new RemoteViews(context.getPackageName(),
 				R.layout.ticktack);
+		
+		views.setOnClickPendingIntent(R.id.widget_content, pendingIntent);
 
 		views.setTextViewText(R.id.textDays,
 				String.valueOf(Math.abs(dayNumber)));

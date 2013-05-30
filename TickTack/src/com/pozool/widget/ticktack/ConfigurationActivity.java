@@ -1,5 +1,7 @@
 package com.pozool.widget.ticktack;
 
+import java.util.Date;
+
 import org.joda.time.DateMidnight;
 
 import android.appwidget.AppWidgetManager;
@@ -25,6 +27,12 @@ public class ConfigurationActivity extends FragmentActivity{
 		    appWidgetId = extras.getInt(
 		    		AppWidgetManager.EXTRA_APPWIDGET_ID, 
 		    		AppWidgetManager.INVALID_APPWIDGET_ID);
+		    if (intent.hasExtra("endDate")) {
+		    	DateMidnight endDate = new DateMidnight(intent.getStringExtra("endDate"));
+		    	ConfigurationFragment fragment = (ConfigurationFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentConfiguration);
+		    	fragment.selectDate(endDate); 
+		    	fragment.onDateSelected(endDate.toDate()); 
+		    }
 		}
 
 		Log.d("Configuration", "AppWidgetId: "+ appWidgetId);

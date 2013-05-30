@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +85,14 @@ public class ConfigurationFragment extends Fragment
 		Period period = new Period(startDate, endDate, PeriodType.dayTime());
 		String days = String.valueOf(period.getDays());
 		((ConfigurationActivity) getActivity()).updatePreviewDate(days);
+	}
+	
+	public void selectDate(DateMidnight endDate) {
+		if (calendarPickerView!=null) {
+			Log.d("Configuration", "Date selected: " + endDate);
+			calendarPickerView.selectDate(endDate.toDate());
+		} else
+			datePicker.init(endDate.year().get(), endDate.monthOfYear().get()-1, endDate.dayOfMonth().get(), this);
 	}
 
 	@Override
