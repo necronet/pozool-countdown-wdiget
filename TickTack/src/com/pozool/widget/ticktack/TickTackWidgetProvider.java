@@ -6,6 +6,7 @@ import org.joda.time.DateMidnight;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
 
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -64,6 +65,24 @@ public class TickTackWidgetProvider extends AppWidgetProvider {
 
 		appWidgetManager.updateAppWidget(appWidgetId, views);
 
+		//schedule alarm to update widget on midnight
+		scheduleAlarm(context, appWidgetId);
 	}
+	
+	private static void scheduleAlarm(Context context, int appWidgetId) {
+
+		Intent intent = new Intent(context, TickTackWidgetProvider.class);
+		intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
+		int[] ids = {appWidgetId};
+		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
+
+		PendingIntent operation = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+		DateMidnight midnight = DateMidnight.now().plusDays(1);
+		AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, midnight.getMillis(), AlarmManager.INTERVAL_DAY, operation);
+	}
+	
+	
 
 }
