@@ -7,6 +7,7 @@ import org.joda.time.DateMidnight;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
 
+import android.app.WallpaperManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -35,6 +36,7 @@ public class ConfigurationFragment extends Fragment
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View view = inflater.inflate(R.layout.configuration, container, false);
+		
 
 		startDate = DateMidnight.now();
 		endDate = DateMidnight.now().plusDays(1);
@@ -72,6 +74,8 @@ public class ConfigurationFragment extends Fragment
 			@Override
 			public void afterTextChanged(Editable s) {}
 		});
+		
+		
 
 		return view;
 	}

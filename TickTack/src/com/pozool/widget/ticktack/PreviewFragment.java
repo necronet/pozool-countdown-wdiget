@@ -2,6 +2,7 @@ package com.pozool.widget.ticktack;
 
 import java.util.Locale;
 
+import android.app.WallpaperManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ public class PreviewFragment extends Fragment {
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View view = inflater.inflate(R.layout.preview, container, false);
+		view.findViewById(R.id.preview_container).setBackgroundDrawable(WallpaperManager.getInstance(getActivity()).getDrawable());
 
 		return view;
 	}
@@ -23,9 +25,9 @@ public class PreviewFragment extends Fragment {
 	public void updateDate(String days) {
 		int dayNumber = Integer.parseInt(days);
 		
-		TextView textLeft = (TextView)getView().findViewById(R.id.text_left);
+		TextView textLeft = (TextView)getView().findViewById(R.id.textDaysText);
 		TextView textDayLeft = (TextView) getView().findViewById(
-				R.id.text_day_left);
+				R.id.textDays);
 		
 		//TODO: we might use a class that hanlde all cases and return resoruces
 		if ( dayNumber > 0 ) {

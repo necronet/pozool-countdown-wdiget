@@ -2,13 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/panel_margin"
+    
     android:baselineAligned="true"
     android:orientation="vertical"
     tools:context=".ConfigurationActivity" >
 
     <fragment
         android:id="@+id/fragmentConfiguration"
+        android:layout_margin="@dimen/panel_margin"
         android:name="com.pozool.widget.ticktack.ConfigurationFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -16,6 +17,7 @@
 
     <fragment
         android:id="@+id/fragmentPreview"
+        android:layout_margin="0dp"
         android:name="com.pozool.widget.ticktack.PreviewFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
