@@ -10,6 +10,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -39,9 +40,11 @@ public class TickTackWidgetProvider extends AppWidgetProvider {
 
 		// Create an Intent to launch ExampleActivity
 		Intent intent = new Intent(context, ConfigurationActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-		intent.putExtra("endDate", endDate.toString());
-		PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+		if (endDate != null)
+			intent.putExtra("endDate", endDate.toString());
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 		DateMidnight startDate = DateMidnight.now();
 		Period period = new Period(startDate, endDate, PeriodType.dayTime());
@@ -65,23 +68,25 @@ public class TickTackWidgetProvider extends AppWidgetProvider {
 
 		// Tell the AppWidgetManager to perform an update on the current app
 		// widget
-
 		appWidgetManager.updateAppWidget(appWidgetId, views);
-
-		//schedule alarm to update widget on midnight
-		scheduleAlarm(context, appWidgetId);
 	}
 	
-	private static void scheduleAlarm(Context context, int appWidgetId) {
+	public void onEnabled(Context context) {
+		scheduleAlarm(context);
+	}
+	
+	private void scheduleAlarm(Context context) {
+		
+		ComponentName componentName = new ComponentName(context.getPackageName(), getClass().getName());
+		AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 
 		Intent intent = new Intent(context, TickTackWidgetProvider.class);
-		intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
-		int[] ids = {appWidgetId};
-		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
+		intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+		intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetManager.getAppWidgetIds(componentName));
 
-		PendingIntent operation = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+		PendingIntent operation = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-		DateMidnight midnight = DateMidnight.now().plusDays(1);
+		DateMidnight midnight = DateMidnight.now().withDayOfMonth(1);
 		AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
 		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, midnight.getMillis(), AlarmManager.INTERVAL_DAY, operation);
 	}
